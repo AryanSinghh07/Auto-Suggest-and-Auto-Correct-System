@@ -42,8 +42,7 @@ The system operates in three core stages:
 
 Here’s what the system looks like in action:
 
-![Sample Output](assets/sample_output.png)
-
+![Image](https://github.com/user-attachments/assets/819d6be1-c96f-46b5-80cb-c04be544c4ae)
 > *Typing "recieve" will auto-correct to "receive" and suggest alternatives like "retrieve", "receipt", etc.*
 
 ---
