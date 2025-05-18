@@ -1,7 +1,6 @@
 # 📝 AutoSuggest and Autocorrect System
 
-![AutoSuggest and Autocorrect](assets/autosuggest_banner.png)
-
+![Image](https://github.com/user-attachments/assets/b6ad6ce2-3809-40af-a56c-e4c44d6195a9)
 ## 📌 About the Project
 
 The **AutoSuggest and Autocorrect System** is a smart text assistance tool designed to improve typing efficiency and reduce spelling errors. By leveraging Natural Language Processing (NLP) techniques, the system identifies and corrects misspelled words while also providing real-time suggestions for alternative or related terms.
