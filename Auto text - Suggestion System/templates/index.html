@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autocorrect System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        body {
+            background-color: #eaf2f8;
+            color: #333;
+            font-family: 'Arial', sans-serif;
+        }
+        h1 {
+            color: #2c3e50;
+            animation: fadeInDown 1s;
+        }
+        .btn-primary {
+            background-color: #3498db;
+            border-color: #2980b9;
+            transition: transform 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #1c5980;
+            transform: scale(1.1);
+        }
+        .btn-copy {
+            background-color: #2ecc71;
+            border-color: #27ae60;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+        .btn-copy:hover {
+            background-color: #27ae60;
+            transform: scale(1.1);
+        }
+        .form-control {
+            border: 2px solid #3498db;
+            transition: box-shadow 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #2980b9;
+            box-shadow: 0 0 10px rgba(41, 128, 185, 0.5);
+        }
+        .thead-dark {
+            background-color: #34495e;
+            color: #fff;
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #ecf0f1;
+        }
+        .table-striped tbody tr:nth-of-type(even) {
+            background-color: #d6eaf8;
+        }
+        .about-section {
+            background-color: #3498db;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            animation: fadeInUp 1s;
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center animate__animated animate__fadeInDown">AutoSuggest and Autocorrect System</h1>
+        
+        <div class="about-section">
+            <h2>About the Autocorrect System</h2>
+            <p>
+                The Autocorrect System is designed to help users find the correct spelling of words and provide suggestions for similar words. 
+                It uses advanced Natural Language Processing (NLP) techniques to analyze input and generate accurate suggestions. 
+                This tool is especially useful for improving typing efficiency and reducing errors.
+            </p>
+        </div>
+
+        <form method="POST" action="/suggest" class="mt-4">
+            <div class="form-group">
+                <label for="keyword" class="font-weight-bold">Enter a word:</label>
+                <input type="text" class="form-control" id="keyword" name="keyword" placeholder="Type a word..." required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+
+        <div id="suggestions" class="mt-4">
+            {% if suggestions %}
+                <h2 class="mt-4">Suggestions</h2>
+                <table class="table table-bordered table-striped animate__animated animate__fadeInUp">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Suggested Word</th>
+                            <th>Similarity</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for suggestion in suggestions %}
+                        <tr>
+                            <td>{{ suggestion['Word'] }}</td>
+                            <td>{{ suggestion['Similarity'] }}</td>
+                            <td>
+                                <button class="btn btn-copy" onclick="copyToClipboard('{{ suggestion['Word'] }}')">Copy</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% elif suggestions is not none %}
+                <p class="text-muted">No suggestions available. Please try another word.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copied to clipboard: ' + text);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
